@@ -1,28 +1,24 @@
-import numpy as np
-
-""" Encoding:
-    cube = np.array([front, left_side, back, right_side, bottom, top]),
-where
-    side = [first_row, second_row, third_row],
-    row = 'abc'
- and
-    'a', 'b' and 'c' are one of 'r', 'g' or 'b' (red, green or blue).
-
- The rows are encoded as follows: If the side is front, left, back or right; the
- first row is the top most row. If it is the top side, the first row is the back
- most row. For the bottom side the first row is the front most row. The labels
- 'r', 'g', and 'b' are encoded in the order in which they apper as seen from
- outside the cube (when looked at the angle in which the first row is the top
- most row)."""
+ps = [-0.9, 0, 0.9]
+x, y, z = 0, 1, 2
+degrees = [0, 90, 180, 270]
+top_side = [(p0, p1, 1) for p0 in ps for p1 in ps]
+points = {rotate_vector(p, axis, deg) for p in top_side for axis in (x, y)
+          for deg in degrees}
 
 def rotate(cube, axis, row, deg):
-    reverse_flipped = flip_axis(axis, flip_axis(axis, flip_axis(axis, cube)))
-    return  flip_axis(axis, rotate_around_z(reverse_flipped))
+    return {rotation_on_row(p, axis, row, deg): cube[p] for p in points}
 
-def rotate_around_z(cube, row, deg):
-    return ...
+def rotation_on_row(p, axis, row, deg):
+    if p[axis] + row - 1 < 0.2: return rotate_vector(p, axis, degrees)
+    return p
 
-def flip_axis(axis, cube):
-    if axis == z: return cube
-    if axis == x: return ...
-    if axis == y: return ...
+def rotate_vector(vector, axis, deg):
+    if deg == 0: return vector
+    if deg == 90: return tuple(sum([rotation_matrix(axis)[i][j] * vector[j]
+                         for j in range(3)]) for i in range(3))
+    return rotate_vector(rotate_vector(vector, axis, 90), axis, deg - 90)
+
+def rotation_matrix(axis):
+    if axis == x: return [[1, 0, 0], [0, 0, 1], [0, -1, 0]]
+    if axis == y: return [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+    if axis == z: return [[0, 1, 0], [-1, 0, 0], [0, 0, 1]]
