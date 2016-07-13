@@ -9,7 +9,6 @@ bottom = [(1 - k, n, -1) for n in ps for k in ps]
 
 sides = [front, left, back, right, top, bottom]
 side_labes = ['front', 'left', 'back', 'right', 'top', 'bottom']
-start_cube = intialize_cube()
 
 def intialize_cube():
     cube = {}
@@ -34,4 +33,5 @@ def print_side(cube, side):
             rows[i] += cube[p]
     for r in rows: print(r)
 
+start_cube = intialize_cube()
 print_cube(start_cube)
