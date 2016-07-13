@@ -1,4 +1,4 @@
-from rubkisolver import *
+from rubiksolver import *
 
 front = [(1, i, 1 - j) for i in ps for j in ps]
 left = [(i, -1, 1 - j) for i in ps for j in ps]
