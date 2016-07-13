@@ -23,7 +23,7 @@ def intialize_cube():
 
 def print_cube(cube):
     for i in range(6):
-        print(side_labes[i] + ':' + '\')
+        print(side_labes[i] + ':' + '\n')
         print_side(cube, sides[i])
         print('')
 
