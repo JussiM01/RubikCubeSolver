@@ -2,8 +2,6 @@ ps = [-0.9, 0, 0.9]
 x, y, z = 0, 1, 2
 degrees = [0, 90, 180, 270]
 top_side = [(p0, p1, 1) for p0 in ps for p1 in ps]
-points = {rotate_vector(p, axis, deg) for p in top_side for axis in (x, y)
-          for deg in degrees}
 
 def rotate(cube, axis, row, deg):
     return {rotation_on_row(p, axis, row, deg): cube[p] for p in points}
@@ -22,3 +20,6 @@ def rotation_matrix(axis):
     if axis == x: return [[1, 0, 0], [0, 0, 1], [0, -1, 0]]
     if axis == y: return [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
     if axis == z: return [[0, 1, 0], [-1, 0, 0], [0, 0, 1]]
+
+points = {rotate_vector(p, axis, deg) for p in top_side for axis in (x, y)
+          for deg in degrees}
