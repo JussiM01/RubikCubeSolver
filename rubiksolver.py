@@ -1,4 +1,4 @@
-ps = [-0.9, 0, 0.9]
+ps = [-0.9, 0.0, 0.9]
 x, y, z = 0, 1, 2
 degrees = [0, 90, 180, 270]
 top_side = [(p0, p1, 1.0) for p0 in ps for p1 in ps]
