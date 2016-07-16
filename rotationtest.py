@@ -12,7 +12,7 @@ side_labels = ['front', 'left', 'back', 'right', 'top', 'bottom']
 
 def intialize_cube():
     cube = {}
-    for p in front: cube[p] = 'r'   # Fornt side is red.
+    for p in front: cube[p] = 'r'   # Front side is red.
     for p in left: cube[p] = 'g'    # Left side is green.
     for p in back: cube[p] = 'o'    # Back side is orange.
     for p in right: cube[p] = 'b'   # Right side is blue.
@@ -34,4 +34,3 @@ def print_side(cube, side):
     for r in rows: print(r)
 
 start_cube = intialize_cube()
-# print_cube(start_cube)

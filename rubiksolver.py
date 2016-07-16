@@ -17,8 +17,8 @@ def rotate_vector(vector, axis, deg):
     return rotate_vector(rotate_vector(vector, axis, 90), axis, deg - 90)
 
 def rotation_matrix(axis):
-    if axis == x: return [[1, 0, 0], [0, 0, -1], [0, 1, 0]]
-    if axis == y: return [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+    if axis == x: return [[1, 0, 0], [0, 0, 1], [0, -1, 0]]
+    if axis == y: return [[0, 0, -1], [0, 1, 0], [1, 0, 0]]
     if axis == z: return [[0, 1, 0], [-1, 0, 0], [0, 0, 1]]
 
 points = {rotate_vector(p, axis, deg) for p in top_side for axis in (x, y)
