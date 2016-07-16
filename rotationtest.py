@@ -34,4 +34,4 @@ def print_side(cube, side):
     for r in rows: print(r)
 
 start_cube = intialize_cube()
-print_cube(start_cube)
+# print_cube(start_cube)
