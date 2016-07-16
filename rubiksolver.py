@@ -7,7 +7,7 @@ def rotate(cube, axis, row, deg):
     return {rotation_on_row(p, axis, row, deg): cube[p] for p in points}
 
 def rotation_on_row(p, axis, row, deg):
-    if p[axis] + row - 1 < 0.2: return rotate_vector(p, axis, degrees)
+    if p[axis] + row - 1 < 0.2: return rotate_vector(p, axis, deg)
     return p
 
 def rotate_vector(vector, axis, deg):
