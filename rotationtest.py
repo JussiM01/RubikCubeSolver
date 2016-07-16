@@ -1,14 +1,14 @@
 from rubiksolver import *
 
-front = [(1, i, 1 - j) for i in ps for j in ps]
-left = [(i, -1, 1 - j) for i in ps for j in ps]
-back = [(-1, 1 - i, 1 - j) for i in ps for j in ps]
-right = [(1 -i, 1, 1 - j) for i in ps for j in ps]
-top = [(k, n, 1) for n in ps for k in ps]
-bottom = [(1 - k, n, -1) for n in ps for k in ps]
+front = [(1, i, -j) for j in ps for i in ps]
+left = [(i, -1, -j) for j in ps for i in ps]
+back = [(-1, i, -j) for j in ps for i in ps]
+right = [(i, 1, -j) for j in ps for i in ps]
+top = [(k, n, 1) for k in ps for n in ps]
+bottom = [(-k, n, -1) for k in ps for n in ps]
 
 sides = [front, left, back, right, top, bottom]
-side_labes = ['front', 'left', 'back', 'right', 'top', 'bottom']
+side_labels = ['front', 'left', 'back', 'right', 'top', 'bottom']
 
 def intialize_cube():
     cube = {}
