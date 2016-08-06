@@ -1,11 +1,11 @@
 from rubiksolver import *
 
-front = [(1.0, i, -j) for j in ps for i in ps]
-left = [(i, -1.0, -j) for j in ps for i in ps]
-back = [(-1.0, i, -j) for j in ps for i in ps]
-right = [(-i, 1.0, -j) for j in ps for i in ps]
-top = [(k, n, 1.0) for k in ps for n in ps]
-bottom = [(-k, n, -1.0) for k in ps for n in ps]
+front = [(10, i, -j) for j in ps for i in ps]
+left = [(i, -10, -j) for j in ps for i in ps]
+back = [(-10, i, -j) for j in ps for i in ps]
+right = [(-i, 10, -j) for j in ps for i in ps]
+top = [(k, n, 10) for k in ps for n in ps]
+bottom = [(-k, n, -10) for k in ps for n in ps]
 
 sides = [front, left, back, right, top, bottom]
 side_labels = ['front', 'left', 'back', 'right', 'top', 'bottom']

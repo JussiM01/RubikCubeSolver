@@ -1,13 +1,13 @@
-ps = [-0.9, 0.0, 0.9]
+ps = [-9, 0, 9]
 x, y, z = 0, 1, 2
 degrees = [0, 90, 180, 270]
-top_side = [(p0, p1, 1.0) for p0 in ps for p1 in ps]
+top_side = [(p0, p1, 10) for p0 in ps for p1 in ps]
 
 def rotate(cube, axis, row, deg):
     return {rotation_on_row(p, axis, row, deg): cube[p] for p in points}
 
 def rotation_on_row(p, axis, row, deg):
-    if abs(p[axis] + row - 1) < 0.2: return rotate_vector(p, axis, deg)
+    if abs(p[axis] + row * 10 - 10) < 2: return rotate_vector(p, axis, deg)
     return p
 
 def rotate_vector(vector, axis, deg):
