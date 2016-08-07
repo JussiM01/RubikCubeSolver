@@ -3,6 +3,10 @@ x, y, z = 0, 1, 2
 degrees = [0, 90, 180, 270]
 top_side = [(p0, p1, 10) for p0 in ps for p1 in ps]
 
+def turn(cube, axis, deg):
+    return rotate(rotate(rotate(cube, axis, 0, deg), axis, 1, deg),
+    axis, 2, deg)
+
 def rotate(cube, axis, row, deg):
     return {rotation_on_row(p, axis, row, deg): cube[p] for p in points}
 
