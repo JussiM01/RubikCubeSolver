@@ -27,8 +27,8 @@ right_string = input('Same for the right side:')
 top_string = input('Same for the top side:')
 bottom_string = input('Same for the bottom side:')
 
-string_pres = [front_string, left_string, back_string, right_string, top_string,
+string_rep = [front_string, left_string, back_string, right_string, top_string,
     bottom_string]
 
 for n in range(6):
-    for m in range(9): cube[sides[n][m]] = string_pres[n][m]
+    for m in range(9): cube[sides[n][m]] = string_rep[n][m]
