@@ -1,4 +1,4 @@
-from rubiksolver import *
+from pointsandrotations import *
 
 front = [(10, i, -j) for j in ps for i in ps]
 left = [(i, -10, -j) for j in ps for i in ps]

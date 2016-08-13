@@ -1,5 +1,5 @@
-from rotationtest import *
-from rubiksolver import *
+from sidesandprinting import *
+from pointsandrotations import *
 
 top_cross = [{(i, 0, 10) for i in ps } | {(0, j, 10) for j in ps},
     {(10, 0, 9), (10, 0, 0)}, {(-10, 0, 9), (-10, 0, 0)},

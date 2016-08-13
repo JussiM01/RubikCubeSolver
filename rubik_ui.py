@@ -1,5 +1,5 @@
-from rubiksolver import *
-from rotationtest import *
+from pointsandrotations import *
+from sidesandprinting import *
 from solvingstatecheck import *
 
 """Temporary user interface. To be replaced with a graphical version."""
