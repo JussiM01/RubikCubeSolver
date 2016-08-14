@@ -21,8 +21,12 @@ bottom_edges = [{(0, 9, -10), (0, 10, -9)}, {(9, 0, -10), (10, 0, -9)},
     {(0, -9, -10), (0, -10, -9)}, {(-9, 0, -10), (-10, 0, -9)}]
 color_pairs = [('w', 'b'), ('w', 'r'), ('w', 'g'), ('w', 'o')]
 side_rot = [(y, 180), (x, 180), (y, 180), (x, 180)]
+side_fix1 = [(y, 270), (x, 270), (y, 90), (x, 90)]
+side_fix2 = [(x, 270), (y, 90), (x, 90), (y, 270)]
 bottom_rot = [(z, 0), (z, 90), (z, 180), (z, 270)]
 row_ind = [0, 0, 3, 3]
+row_ind2 = [0, 3, 3, 0]
+top_faces = [(0, 9, 10), (9, 0, 10), (0, -9, 10), (-9, 0, 10)]
 
 def place_top_edge(cube, order):
     new_cube, rotations = cube, []
@@ -43,22 +47,34 @@ def place_top_edge(cube, order):
 
 def fit_top_edge(cube, order):
     new_cube, rotations = place_top_edge(cube)
-    pass # If wrong color at the top: do required rotations.
+    if new_cube[top_edges[order]] != 'w':
+        new_cube = rotate(new_cube, side_fix1[order][0], row_ind[order],
+            side_fix1[order][1])
+        rotations.append(side_fix1[order])
+        new_cube = rotate(new_cube, z, 0, 90)
+        rotations.append((z, 90))
+        new_cube = rotate(new_cube, side_fix2[order][0], row_ind2[order],
+            side_fix2[order][1])
+        rotations.append(side_fix2[order])
+        new_cube = rotate(new_cube, z, 0, 270)
+        rotations.append((z, 270))
     return (new_cube, rotations)
 
 def make_a_cross(cube):
-    instructions = {}
+    instructions = {} # Get rid of this!
     rotations = []
     step_1 = top_white_center(cube)
     cube_1 = step_1[0]
-    instructions['which side on top'] = step_1[1]
+    instructions['which side on top'] = step_1[1]  # Same here.
     step_2 = blue_right_center(cube_1)
-    cube_2 = step_2[0]
+    new_cube = step_2[0]
     rotations.append(step_2[1])
-    step_3 = fit_top_edge(cube_3, 0)
-    cube_3 = step_3[0]
-    rotations.append(step_3[1])
-    pass
+    for order in range(4):
+        new_step = fit_top_edge(new_cube, order)
+        new_cube = new_step[0]
+        rotations.append(new_step[1])
+    return (instructions, new_cube, rotations)
 
     # TODO: There are obvious ways to refactor the code by writing functions
     # which combine some repeated actions.
+    # Change the implementation of the row rotations.
