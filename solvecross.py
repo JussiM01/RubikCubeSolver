@@ -20,18 +20,25 @@ top_edges = [{(0, 9, 10), (0, 10, 9)}, {(9, 0, 10), (10, 0, 9)},
 bottom_edges = [{(0, 9, -10), (0, 10, -9)}, {(9, 0, -10), (10, 0, -9)},
     {(0, -9, -10), (0, -10, -9)}, {(-9, 0, -10), (-10, 0, -9)}]
 color_pairs = [('w', 'b'), ('w', 'r'), ('w', 'g'), ('w', 'o')]
+side_rot = [(y, 180), (x, 180), (y, 180), (x, 180)]
+bottom_rot = [(z, 0), (z, 90), (z, 180), (z, 270)]
+row_ind = [0, 0, 3, 3]
 
 def place_top_edge(cube, order):
     new_cube, rotations = cube, []
     current, color_pair = top_edges[order], color_pairs[order]
     for edge in top_edges:
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
-            if edge == current: break
-            pass # Direction depend on the edge.
+            if edge == current:
+                break
+            else: new_cube = rotate(new_cube, side_rot[order][0],
+                row_ind[order], side_rot[order][1])
+                rotations.append(side_rot)
             return (new_cube, rotations)
     for edge in bottom_edges:
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
-            pass # Direction depend on the edge.
+            new_cube = rotate(new_cube, side_rot[order][0], row_ind[order],
+            side_rot[order][1])
             return (new_cube, rotations)
 
 def fit_top_edge(cube, order):
