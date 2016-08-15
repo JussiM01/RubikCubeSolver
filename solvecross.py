@@ -2,16 +2,6 @@ from pointsandrotations import *
 from sidesandprinting import *
 from solvingstatecheck import *
 
-def top_white_center(cube):
-    for side_label in side_labels:
-        rotated_cube = switch_top_side(cube, side_label)
-        if rotated_cube[(0, 0, 10)] == 'w': return (rotated_cube, side_label)
-
-def blue_right_center(cube):
-    for deg in [0, 90, 180, 270]:
-        rotated_cube = turn(cube, z, deg)
-        if rotated_cube[(0, 10, 0)] == 'b': return (rotated_cube, (z, deg))
-
 def color_fits(cube, face, color_pair):
     return (cube[face] == color_1 or cube[face] == color_2)
 
@@ -61,19 +51,13 @@ def fit_top_edge(cube, order):
     return (new_cube, rotations)
 
 def make_a_cross(cube):
-    instructions = {} # Get rid of this!
-    rotations = []
-    step_1 = top_white_center(cube)
-    cube_1 = step_1[0]
-    instructions['which side on top'] = step_1[1]  # Same here.
-    step_2 = blue_right_center(cube_1)
-    new_cube = step_2[0]
+    new_cube, rotations = cube, []
     rotations.append(step_2[1])
     for order in range(4):
         new_step = fit_top_edge(new_cube, order)
         new_cube = new_step[0]
         rotations.append(new_step[1])
-    return (instructions, new_cube, rotations)
+    return (new_cube, rotations)
 
     # TODO: There are obvious ways to refactor the code by writing functions
     # which combine some repeated actions.
