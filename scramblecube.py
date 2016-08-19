@@ -9,7 +9,7 @@ rotations = [(y, 0, 90), (x, 0, 90), (y, 3, 270), (x, 3, 270), (z, 0, 90),
 
 def scramble(cube):
     new_cube = cube
-    for n in range(30):
+    for n in range(1000):
         rot = rotations[rd.randrange(6)]
         new_cube = rotate(new_cube, rot[0], rot[1], rot[2])
     return new_cube

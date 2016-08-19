@@ -25,8 +25,9 @@ def place_top_edge(cube, order):
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
             if edge == current:
                 break
-            else: new_cube = rotate(new_cube, side_rot[order][0],
-                row_ind[order], side_rot[order][1])
+            else:
+                new_cube = rotate(new_cube, side_rot[order][0],
+                    row_ind[order], side_rot[order][1])
                 rotations.append(side_rot)
             return (new_cube, rotations)
     for edge in bottom_edges:
@@ -36,7 +37,7 @@ def place_top_edge(cube, order):
             return (new_cube, rotations)
 
 def fit_top_edge(cube, order):
-    new_cube, rotations = place_top_edge(cube)
+    new_cube, rotations = place_top_edge(cube, order)
     if new_cube[top_edges[order]] != 'w':
         new_cube = rotate(new_cube, side_fix1[order][0], row_ind[order],
             side_fix1[order][1])
@@ -52,13 +53,11 @@ def fit_top_edge(cube, order):
 
 def make_a_cross(cube):
     new_cube, rotations = cube, []
-    rotations.append(step_2[1])
     for order in range(4):
         new_step = fit_top_edge(new_cube, order)
         new_cube = new_step[0]
         rotations.append(new_step[1])
     return (new_cube, rotations)
 
-    # TODO: There are obvious ways to refactor the code by writing functions
-    # which combine some repeated actions.
+    # TODO: Fix the bugs.
     # Change the implementation of the row rotations.
