@@ -27,12 +27,15 @@ dir_rotations = [['R'], ['F'], ['L'], ['B'], ['U'], ['D']]
 inv_rotations = [['Ri'], ['Fi'], ['Li'], ['Bi'], ['Ui'], ['Di']]
 
 def turn(cube, axis, deg):
-    return {rotate_vector(p, axis, deg): cube[p] for p in points}
+    if deg in degrees:
+        return {rotate_vector(p, axis, deg): cube[p] for p in points}
+    if deg > 90: return turn(turn(cube, axis, 90), axis, deg - 90)
+    if deg < -90: return turn(turn(cube, axis, -90), axis, deg + 90)
 
 def rotate(cube, rotations):
     if rotations in dir_rotations: return dir_rotate(cube, rotations)
     if rotations in inv_rotations: return inv_rotate(cube, rotations)
-    return rotate(rotate(cube, rotations[0]), rotations[1:])
+    return rotate(rotate(cube, rotations[0:1]), rotations[1:])
 
 def dir_rotate(cube, rotation):
     if rotation == ['R']: return rot_R(cube)
