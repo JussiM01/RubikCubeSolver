@@ -3,12 +3,12 @@ from sidesandprinting import *
 from solvingstatecheck import *
 
 def color_fits(cube, face, color_pair):
-    return (cube[face] == color_1 or cube[face] == color_2)
+    return (cube[face] == color_pair[0] or cube[face] == color_pair[1])
 
-top_edges = [{(0, 9, 10), (0, 10, 9)}, {(9, 0, 10), (10, 0, 9)},
-    {(0, -9, 10), (0, -10, 9)}, {(-9, 0, 10), (-10, 0, 9)}]
-bottom_edges = [{(0, 9, -10), (0, 10, -9)}, {(9, 0, -10), (10, 0, -9)},
-    {(0, -9, -10), (0, -10, -9)}, {(-9, 0, -10), (-10, 0, -9)}]
+top_edges = [((0, 9, 10), (0, 10, 9)), ((9, 0, 10), (10, 0, 9)),
+    ((0, -9, 10), (0, -10, 9)), ((-9, 0, 10), (-10, 0, 9))]
+bottom_edges = [((0, 9, -10), (0, 10, -9)), ((9, 0, -10), (10, 0, -9)),
+    ((0, -9, -10), (0, -10, -9)), ((-9, 0, -10), (-10, 0, -9))]
 color_pairs = [('w', 'b'), ('w', 'r'), ('w', 'g'), ('w', 'o')]
 side_rot = [(y, 180), (x, 180), (y, 180), (x, 180)]
 side_fix1 = [(y, 270), (x, 270), (y, 90), (x, 90)]
@@ -24,7 +24,7 @@ def place_top_edge(cube, order):
     for edge in top_edges:
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
             if edge == current:
-                break
+                return (new_cube, rotations)
             else:
                 new_cube = rotate(new_cube, side_rot[order][0],
                     row_ind[order], side_rot[order][1])
@@ -34,11 +34,11 @@ def place_top_edge(cube, order):
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
             new_cube = rotate(new_cube, side_rot[order][0], row_ind[order],
             side_rot[order][1])
-            return (new_cube, rotations)
+    return (new_cube, rotations)
 
 def fit_top_edge(cube, order):
     new_cube, rotations = place_top_edge(cube, order)
-    if new_cube[top_edges[order]] != 'w':
+    if new_cube[top_edges[order][0]] != 'w':
         new_cube = rotate(new_cube, side_fix1[order][0], row_ind[order],
             side_fix1[order][1])
         rotations.append(side_fix1[order])
