@@ -2,8 +2,8 @@ from pointsandrotations import *
 from sidesandprinting import *
 from solvingstatecheck import *
 
-side_switch = {'front': (y, 90), 'bottom': (y, 180), 'back': (y, 270),
-    'left': (x, 90), 'right': (x, 270), 'top': (x, 0)}
+side_switch = {'front': (y, 90), 'down': (y, 180), 'back': (y, -90),
+    'left': (x, 90), 'right': (x, -90), 'up': (x, 0)}
 
 def top_white_center(cube):
     for side_label in side_labels:
