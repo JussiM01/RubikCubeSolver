@@ -26,14 +26,14 @@ def place_top_edge(cube, order):
             if edge == current:
                 return (new_cube, rotations)
             else:
-                new_cube = rotate(new_cube, side_rot[order][0],
-                    row_ind[order], side_rot[order][1])
-                rotations.append(side_rot)
+                new_cube = rotate(new_cube, side_rot[order][0], # Should depend
+                    row_ind[order], side_rot[order][1]) # on the edge, not on
+                rotations.append(side_rot) # the order.
             return (new_cube, rotations)
     for edge in bottom_edges:
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
             new_cube = rotate(new_cube, side_rot[order][0], row_ind[order],
-            side_rot[order][1])
+            side_rot[order][1]) # Same as above.
     return (new_cube, rotations)
 
 def fit_top_edge(cube, order):
