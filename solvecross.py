@@ -5,15 +5,14 @@ from solvingstatecheck import *
 def color_fits(cube, face, color_pair):
     return (cube[face] == color_pair[0] or cube[face] == color_pair[1])
 
-top_edges = [((0, 9, 10), (0, 10, 9)), ((9, 0, 10), (10, 0, 9)),
-    ((0, -9, 10), (0, -10, 9)), ((-9, 0, 10), (-10, 0, 9))]
-bottom_edges = [((0, 9, -10), (0, 10, -9)), ((9, 0, -10), (10, 0, -9)),
-    ((0, -9, -10), (0, -10, -9)), ((-9, 0, -10), (-10, 0, -9))]
-color_pairs = [('w', 'b'), ('w', 'r'), ('w', 'g'), ('w', 'o')]
-side_rot = [(y, 180), (x, 180), (y, 180), (x, 180)]
+top_edges = [((0, 9, 10), (0, 10, 9)), ((-9, 0, 10), (-10, 0, 9)),
+    ((0, -9, 10), (0, -10, 9)), ((9, 0, 10), (10, 0, 9))]
+bottom_edges = [((0, 9, -10), (0, 10, -9)), ((-9, 0, -10), (-10, 0, -9)),
+    ((0, -9, -10), (0, -10, 9)), ((9, 0, -10), (10, 0, -9))]
+color_pairs = [('w', 'b'), ('w', 'o'), ('w', 'g'), ('w', 'r')]
+side_rot = [['R', 'R'], ['B', 'B'], ['L', 'L'], ['F','F']]
 side_fix1 = [(y, 270), (x, 270), (y, 90), (x, 90)]
 side_fix2 = [(x, 270), (y, 90), (x, 90), (y, 270)]
-bottom_rot = [(z, 0), (z, 90), (z, 180), (z, 270)]
 row_ind = [0, 0, 3, 3]
 row_ind2 = [0, 3, 3, 0]
 top_faces = [(0, 9, 10), (9, 0, 10), (0, -9, 10), (-9, 0, 10)]
@@ -26,19 +25,24 @@ def place_top_edge(cube, order):
             if edge == current:
                 return (new_cube, rotations)
             else:
-                new_cube = rotate(new_cube, side_rot[order][0], # Should depend
-                    row_ind[order], side_rot[order][1]) # on the edge, not on
-                rotations.append(side_rot) # the order.
-            return (new_cube, rotations)
+                new_cube = rotate(side_rot[top_edges.index(edge)] * 2)
+                rotations += (side_rot[top_edges.index(edge)] * 2)
     for edge in bottom_edges:
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
-            new_cube = rotate(new_cube, side_rot[order][0], row_ind[order],
-            side_rot[order][1]) # Same as above.
+            n = bottom_edges.index(edge) - order
+            if n > 0:
+                new_cube = rotate(['D'] * n)
+                rotations.append(['D'] * n)
+            if n < 0:
+                new_cube = rotate(['Di'] * -n)
+                rotations += (['Di']  * -n)
+            new_cube = rotate(side_rot[bottom_edges.index(edge)] * 2)
+            rotations += (side_rot[bottom_edges.index(edge)] * 2)
     return (new_cube, rotations)
 
 def fit_top_edge(cube, order):
     new_cube, rotations = place_top_edge(cube, order)
-    if new_cube[top_edges[order][0]] != 'w':
+    if new_cube[top_edges[order][0]] != 'w': # Continue debugging from here
         new_cube = rotate(new_cube, side_fix1[order][0], row_ind[order],
             side_fix1[order][1])
         rotations.append(side_fix1[order])
