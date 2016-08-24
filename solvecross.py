@@ -12,7 +12,6 @@ bottom_edges = [((0, 9, -10), (0, 10, -9)), ((-9, 0, -10), (-10, 0, -9)),
 color_pairs = [('w', 'b'), ('w', 'o'), ('w', 'g'), ('w', 'r')]
 side_rot = [['R'], ['B'], ['L'], ['F']]
 side_inv = [['Ri'], ['Bi'], ['Li'], ['Fi']]
-top_faces = [(0, 9, 10), (9, 0, 10), (0, -9, 10), (-9, 0, 10)]
 
 def place_top_edge(cube, order):
     new_cube, rotations = cube, []
