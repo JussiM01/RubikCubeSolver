@@ -39,7 +39,7 @@ def place_top_edge(cube, order):
 def fit_top_edge(cube, order):
     new_cube, rotations = place_top_edge(cube, order)
     if new_cube[top_edges[order][0]] != 'w':
-        rot_sequence = [side_inv[order], ['U'], side_inv[order - 1], ['Ui']]
+        rot_sequence = side_inv[order] + ['U'] + side_inv[order - 1] + ['Ui']
         new_cube = rotate(new_cube, rot_sequence)
         rotations += rot_sequence
     return (new_cube, rotations)
