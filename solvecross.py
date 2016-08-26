@@ -7,6 +7,8 @@ def color_fits(cube, face, color_pair):
 
 top_edges = [((0, 9, 10), (0, 10, 9)), ((-9, 0, 10), (-10, 0, 9)),
     ((0, -9, 10), (0, -10, 9)), ((9, 0, 10), (10, 0, 9))]
+side_edges = [((10, 9, 0), (9, 10, 0)), ((-9, 10, 0), (-10, 9, 0)),
+    ((-10, -9, 0), (-9, -10, 0)), ((9, -10, 0), (10, -9, 0))]
 bottom_edges = [((0, 9, -10), (0, 10, -9)), ((-9, 0, -10), (-10, 0, -9)),
     ((0, -9, -10), (0, -10, 9)), ((9, 0, -10), (10, 0, -9))]
 color_pairs = [('w', 'b'), ('w', 'o'), ('w', 'g'), ('w', 'r')]
@@ -23,6 +25,10 @@ def place_top_edge(cube, order):
             else:
                 new_cube = rotate(new_cube, side_rot[top_edges.index(edge)] * 2)
                 rotations += (side_rot[top_edges.index(edge)] * 2)
+    for edge in side_edges:
+        if {color_fits(cube, face, color_pair) for face in edge} == {True}:
+            new_cube = rotate(new_cube, side_rot[side_edges.index(edge)])
+            rotations += (side_rot[side_edges.index(edge)])
     for edge in bottom_edges:
         if {color_fits(cube, face, color_pair) for face in edge} == {True}:
             n = bottom_edges.index(edge) - order
