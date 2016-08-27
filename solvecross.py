@@ -38,8 +38,8 @@ def place_top_edge(cube, order):
             if n < 0:
                 new_cube = rotate(new_cube, ['Di'] * -n)
                 rotations += (['Di']  * -n)
-            new_cube = rotate(new_cube, side_rot[bottom_edges.index(edge)] * 2)
-            rotations += (side_rot[bottom_edges.index(edge)] * 2)
+        new_cube = rotate(new_cube, side_rot[bottom_edges.index(edge)] * 2)
+        rotations += (side_rot[bottom_edges.index(edge)] * 2)
     return (new_cube, rotations)
 
 def fit_top_edge(cube, order):
