@@ -34,7 +34,7 @@ def place_top_edge(cube, order):
             n = bottom_edges.index(edge) - order
             if n > 0:
                 new_cube = rotate(new_cube, ['D'] * n)
-                rotations.append(['D'] * n)
+                rotations += (['D'] * n)
             if n < 0:
                 new_cube = rotate(new_cube, ['Di'] * -n)
                 rotations += (['Di']  * -n)
