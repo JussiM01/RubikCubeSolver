@@ -27,7 +27,7 @@ def place_top_edge(cube, edge, current, color_pair, order):
             next_step = place_bottom_edge(new_cube, edge, order)
             new_cube = next_step[0]
             rotations += next_step[1]
-            return (new_cube, rotations)
+    return (new_cube, rotations)
 
 def place_side_edge(cube, edge, color_pair, order):
     new_cube, rotations = cube, []
@@ -38,7 +38,7 @@ def place_side_edge(cube, edge, color_pair, order):
             next_step = place_bottom_edge(new_cube, edge, order)
             new_cube = next_step[0]
             rotations += next_step[1]
-            return (new_cube, rotations)
+    return (new_cube, rotations)
 
 def place_bottom_edge(cube, edge, order):
     new_cube, rotations = cube, []
