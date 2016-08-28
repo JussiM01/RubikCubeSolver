@@ -32,13 +32,13 @@ def place_top_edge(cube, edge, current, color_pair, order):
 def place_side_edge(cube, edge, color_pair, order):
     new_cube, rotations = cube, []
     new_cube = rotate(new_cube, side_rot[side_edges.index(edge)])
-    rotations += (side_rot[side_edges.index(edge)])
+    rotations += (side_rot[side_edges.index(edge) - 1])
     for edge_2 in bottom_edges:
         if {color_fits(new_cube, face, color_pair) for face in edge} == {True}:
             next_step = place_bottom_edge(new_cube, edge_2, order)
             new_cube = next_step[0]
             rotations += next_step[1]
-    new_cube = rotate(new_cube, side_inv[side_edges.index(edge)])
+    new_cube = rotate(new_cube, side_inv[side_edges.index(edge) - 1])
     rotations += (side_inv[side_edges.index(edge)])
     return (new_cube, rotations)
 
