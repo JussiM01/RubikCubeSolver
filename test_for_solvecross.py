@@ -3,6 +3,7 @@ from solvecross import *
 
 def test_solvecross():
     cube = scramble(start_cube)
+    print('')
     print('SCRAMBLED CUBE:')
     print('')
 
@@ -17,6 +18,11 @@ def test_solvecross():
         print('NEW CUBE AT THE SOLVING PHASE OF ORDER ' + str(order) + ':')
         print('')
         print_cube(new_cube)
+        print('')
 
         print('ALL ROTATIONS UP TO ORDER ' + str(order) + ':')
         print(rotations)
+
+        print('')
+        print('####')
+        print('')
