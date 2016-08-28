@@ -2,7 +2,7 @@ from pointsandrotations import *
 
 front = [(10, i, -j) for j in ps for i in ps]
 left = [(i, -10, -j) for j in ps for i in ps]
-back = [(-10, i, -j) for j in ps for i in ps]
+back = [(-10, -i, -j) for j in ps for i in ps]
 right = [(-i, 10, -j) for j in ps for i in ps]
 up = [(k, n, 10) for k in ps for n in ps]
 down = [(-k, n, -10) for k in ps for n in ps]
