@@ -21,11 +21,11 @@ def orange_pieces(cube): return {cube[p] for p in segment_B} == {'o'}
 def green_pieces(cube): return {cube[p] for p in segment_L} == {'g'}
 def red_pieces(cube): return {cube[p] for p in segment_F} == {'r'}
 
-def test_make_a_cross(num_iterations):
-    results = []
-    for n in range(num_iterations):
+def test_make_a_cross(num_iter):
+    count = 0
+    for n in range(num_iter):
         cube = scramble(start_cube)
         new_cube = make_a_cross(cube)[0]
-        res = cross_solved(new_cube)
-        results.append(res)
-    return set(results) == {True}
+        solved = cross_solved(new_cube)
+        if solved: count += 1
+    print('Solved correctly ' + str(count) + ' out of ' + str(num_iter) + '.')

@@ -28,4 +28,5 @@ def test_solvecross():
         print('####')
         print('')
 
-        print(str(cross_solved(new_cube)))
+    print(str(cross_solved(new_cube)))
+    print('')
