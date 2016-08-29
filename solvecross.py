@@ -35,15 +35,15 @@ def place_side_edge(cube, edge, color_pair, order):
     rotations += (side_rot[side_edges.index(edge) - 1])
     for edge2 in bottom_edges:
         if {color_fits(new_cube, face, color_pair) for face in edge2} == {True}:
-            next_step = place_bottom_edge(new_cube, edge2, order)
+            fix = []
+            if order != 0 and order != bottom_edges.index(edge2):
+                fix = side_inv[side_edges.index(edge) - 1]
+            next_step = place_bottom_edge(new_cube, edge2, order, fix)
             new_cube = next_step[0]
             rotations += next_step[1]
-            if order != 0 and order != bottom_edges.index(edge2):
-                new_cube = rotate(new_cube, side_inv[side_edges.index(edge) - 1])
-                rotations += (side_inv[side_edges.index(edge) - 1])
     return (new_cube, rotations)
 
-def place_bottom_edge(cube, edge, order):
+def place_bottom_edge(cube, edge, order, fix=[]):
     new_cube, rotations = cube, []
     n = order - bottom_edges.index(edge)
     if n > 0:
@@ -52,6 +52,9 @@ def place_bottom_edge(cube, edge, order):
     if n < 0:
         new_cube = rotate(new_cube, ['Di'] * -n)
         rotations += (['Di']  * -n)
+    if fix != []:
+        new_cube = rotate(new_cube, fix)
+        rotations += fix
     new_cube = rotate(new_cube, side_rot[bottom_edges.index(edge) + n] * 2)
     rotations += (side_rot[bottom_edges.index(edge) + n] * 2)
     return (new_cube, rotations)
@@ -83,6 +86,3 @@ def make_a_cross(cube):
         new_cube = new_step[0]
         rotations += new_step[1]
     return (new_cube, rotations)
-
-    # TODO: Fix the bugs.
-    # Divide place_top_edge into sorter functions.
