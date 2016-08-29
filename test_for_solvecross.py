@@ -1,5 +1,6 @@
 from scramblecube import *
 from solvecross import *
+from test2_for_solvecross import *
 
 def test_solvecross():
     cube = scramble(start_cube)
@@ -20,9 +21,11 @@ def test_solvecross():
         print_cube(new_cube)
         print('')
 
-        print('ALL ROTATIONS UP TO ORDER ' + str(order) + ':')
-        print(rotations)
+        print('ROTATIONS FOR ORDER ' + str(order) + ':')
+        print(new_step[1])
 
         print('')
         print('####')
         print('')
+
+        print(str(cross_solved(new_cube)))

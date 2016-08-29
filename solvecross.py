@@ -10,7 +10,7 @@ top_edges = [((0, 9, 10), (0, 10, 9)), ((-9, 0, 10), (-10, 0, 9)),
 side_edges = [((10, 9, 0), (9, 10, 0)), ((-9, 10, 0), (-10, 9, 0)),
     ((-10, -9, 0), (-9, -10, 0)), ((9, -10, 0), (10, -9, 0))]
 bottom_edges = [((0, 9, -10), (0, 10, -9)), ((-9, 0, -10), (-10, 0, -9)),
-    ((0, -9, -10), (0, -10, 9)), ((9, 0, -10), (10, 0, -9))]
+    ((0, -9, -10), (0, -10, -9)), ((9, 0, -10), (10, 0, -9))]
 color_pairs = [('w', 'b'), ('w', 'o'), ('w', 'g'), ('w', 'r')]
 side_rot = [['R'], ['B'], ['L'], ['F']]
 side_inv = [['Ri'], ['Bi'], ['Li'], ['Fi']]
@@ -22,24 +22,25 @@ def place_top_edge(cube, edge, current, color_pair, order):
     else:
         new_cube = rotate(new_cube, side_rot[top_edges.index(edge)] * 2)
         rotations += (side_rot[top_edges.index(edge)] * 2)
-    for edge in bottom_edges:
-        if {color_fits(new_cube, face, color_pair) for face in edge} == {True}:
-            next_step = place_bottom_edge(new_cube, edge, order)
+    for edge2 in bottom_edges:
+        if {color_fits(new_cube, face, color_pair) for face in edge2} == {True}:
+            next_step = place_bottom_edge(new_cube, edge2, order)
             new_cube = next_step[0]
             rotations += next_step[1]
     return (new_cube, rotations)
 
 def place_side_edge(cube, edge, color_pair, order):
     new_cube, rotations = cube, []
-    new_cube = rotate(new_cube, side_rot[side_edges.index(edge)])
+    new_cube = rotate(new_cube, side_rot[side_edges.index(edge) - 1])
     rotations += (side_rot[side_edges.index(edge) - 1])
-    for edge_2 in bottom_edges:
-        if {color_fits(new_cube, face, color_pair) for face in edge} == {True}:
-            next_step = place_bottom_edge(new_cube, edge_2, order)
+    for edge2 in bottom_edges:
+        if {color_fits(new_cube, face, color_pair) for face in edge2} == {True}:
+            next_step = place_bottom_edge(new_cube, edge2, order)
             new_cube = next_step[0]
             rotations += next_step[1]
-    new_cube = rotate(new_cube, side_inv[side_edges.index(edge) - 1])
-    rotations += (side_inv[side_edges.index(edge)])
+            if order != 0 and order != bottom_edges.index(edge2):
+                new_cube = rotate(new_cube, side_inv[side_edges.index(edge) - 1])
+                rotations += (side_inv[side_edges.index(edge) - 1])
     return (new_cube, rotations)
 
 def place_bottom_edge(cube, edge, order):
