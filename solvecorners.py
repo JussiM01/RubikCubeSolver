@@ -12,7 +12,7 @@ color_triplets = [('w', 'r', 'b'), ('w', 'b', 'o'), ('w', 'o', 'g'),
 
 def color_in(color, c_triplet): return color in c_triplet
 
-def colors_match(corner, c_triplet):
+def colors_match(cube, corner, c_triplet):
     return {color_in(cube[face], c_triplet) for face in corner} == {True}
 
 def corner_fits(cube, order):
@@ -21,7 +21,8 @@ def corner_fits(cube, order):
 
 def corner_to_below(cube, corner, order, sign):
     new_cube, rotations = cube, []
-    n = order - bottom_corners.index(corner)
+    if sign == '+': n = order - top_corners.index(corner)
+    if sign == '-': n = order - bottom_corners.index(corner)
     if sign == '+':
         ind = top_corners.index(corner)
         rot_sequence = side_inv[ind] + ['Di'] + side_rot[ind]
@@ -38,14 +39,14 @@ def corner_to_below(cube, corner, order, sign):
 def place_corner(cube, order):
     new_cube, rotations = cube, []
     for corner in bottom_corners:
-        if colors_match(corner, color_triplets[order]):
+        if colors_match(new_cube, corner, color_triplets[order]):
             res = corner_to_below(new_cube, corner, order, '-')
             new_cube = res[0]
             rotations += res[1]
             return (new_cube, rotations)
     for corner in top_corners:
-        if colors_match(corner, color_triplets[order]):
-            res = place_top_corner(new_cube, corner, order, '+')
+        if colors_match(new_cube, corner, color_triplets[order]):
+            res = corner_to_below(new_cube, corner, order, '+')
             new_cube = res[0]
             rotations += res[1]
             return (new_cube, rotations)
