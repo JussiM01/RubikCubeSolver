@@ -69,5 +69,3 @@ def make_a_top_layer(cube):
         new_cube = res2[0]
         rotations += res2[1]
     return (new_cube, rotations)
-
-# TODO: Test and debug.
