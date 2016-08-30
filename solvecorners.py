@@ -25,7 +25,7 @@ def corner_to_below(cube, corner, order, sign):
     if sign == '-': n = order - bottom_corners.index(corner)
     if sign == '+':
         ind = top_corners.index(corner)
-        rot_sequence = side_inv[ind] + ['Di'] + side_rot[ind]
+        rot_sequence = side_inv[ind] + ['Di'] + side_rot[ind] + ['D']
         new_cube = rotate(new_cube, rot_sequence)
         rotations += rot_sequence
     if n > 0:
