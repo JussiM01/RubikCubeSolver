@@ -11,6 +11,13 @@ def test_solvecorners():
     print_cube(cube)
 
     new_cube, rotations = make_a_cross(cube)
+
+    print('')
+    print('CUBE WITH CROSS SOLVED:')
+    print('')
+
+    print_cube(new_cube)
+    
     for order in range(4):
         res1 = place_corner(new_cube, order)
         new_cube = res1[0]

@@ -54,10 +54,10 @@ def place_corner(cube, order):
 def fit_top_corner(cube, order):
     new_cube, rotations = cube, []
     rot_sequence = side_inv[order] + ['Di'] + side_rot[order] + ['D']
-    for i in range(3):
+    while not corner_fits(new_cube, order):
         new_cube = rotate(new_cube, rot_sequence)
         rotations += rot_sequence
-        if corner_fits(new_cube, order): return (new_cube, rotations)
+    return (new_cube, rotations)
 
 def make_a_top_layer(cube):
     new_cube, rotations = make_a_cross(cube)

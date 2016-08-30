@@ -1,5 +1,5 @@
 from scramblecube import *
-from solvecross import *
+from solvecorners import *
 
 def corners_solved(cube):
     if not white_side_up(cube): return False
@@ -20,7 +20,7 @@ def orange_triangle(cube): return {cube[p] for p in triangle_B} == {'o'}
 def green_triangle(cube): return {cube[p] for p in triangle_L} == {'g'}
 def red_triangle(cube): return {cube[p] for p in triangle_F} == {'r'}
 
-def test_make_a_cross(num_iter):
+def test_make_a_top_layer(num_iter):
     count = 0
     for n in range(num_iter):
         cube = scramble(start_cube)
