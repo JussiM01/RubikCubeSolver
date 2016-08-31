@@ -4,15 +4,18 @@ left_c_pairs = [('r', 'g'), ('g', 'o'), ('o', 'b'), ('b', 'r')]
 right_c_pairs = [('g', 'o'), ('o', 'b'), ('b', 'r'), ('r', 'g')]
 outer_colors = ['g', 'o', 'b', 'r']
 
-middle_edges = pass
-outer_faces = pass
+middle_edges = {((10, 9, 0), (9, 10, 0)), ((-9, 10, 0), (-10, 9, 0)),
+    ((-10, -9, 0), (-9, -10, 0,)), ((9, -10, 0), (10, -9, 0))}
+outer_faces = {p for p in points if p[z] not in [-10, 10]}
+
+upside_down = turn(start_cube, x, 180)
 
 def outer_color_fits(cube, edge, order):
     return ({cube[face] for face in edge if face in outer_faces[order]}
         == {outer_colors[order]})
 
 def correct_middle_edge(cube, edge, order):
-    pass
+    return {cube[face] == upside_down[face] for face in edge} == {True}
 
 def edge_to_middle(cube, edge, order):
     pass
