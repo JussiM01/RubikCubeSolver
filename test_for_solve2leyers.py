@@ -43,5 +43,5 @@ def test_solve2leyers():
         print('####')
         print('')
 
-    print(str(corners_solved(new_cube)))
+    print(str(twolayers_solved(new_cube)))
     print('')
