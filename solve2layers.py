@@ -6,7 +6,7 @@ outer_colors = ['g', 'o', 'b', 'r']
 
 middle_edges = {((10, 9, 0), (9, 10, 0)), ((-9, 10, 0), (-10, 9, 0)),
     ((-10, -9, 0), (-9, -10, 0,)), ((9, -10, 0), (10, -9, 0))}
-outer_faces = {p for p in points if p[z] not in [-10, 10]}
+outer_faces = [{p for p in sides[i] if p[z] not in [-10, 10]} for i in range(4)]
 
 upside_down = turn(start_cube, x, 180)
 
@@ -21,7 +21,7 @@ def edge_to_middle(cube, edge, order):
     rot_sequence1 = (['U'] + side_rot[order - 4] + ['Ui'] + side_inv[order - 4]
         + ['Ui'] + side_inv[order] + ['U'] + side_rot[order])
     rot_sequence2 = (['Ui'] + side_inv[order - 1] + ['U'] + side_rot[order - 1]
-        + ['U'] + side_rot[order] + ['Ui'] side_inv[order])
+        + ['U'] + side_rot[order] + ['Ui'] + side_inv[order])
     tmp1, tmp2 = rotate(cube, rot_sequence1), rotate(cube, rot_sequence2)
     if correct_middle_edge(tmp1, edge, order): return (tmp1, rot_sequence1)
     if correct_middle_edge(tmp2, edge, order): return (tmp2, rot_sequence2)
