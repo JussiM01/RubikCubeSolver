@@ -2,7 +2,7 @@ from scramblecube import *
 from solve2layers import *
 from test2_for_solve2layers import *
 
-def test_solve2leyers():
+def test_solve2layers():
     cube = scramble(start_cube)
     print('')
     print('SCRAMBLED CUBE:')
