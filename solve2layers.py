@@ -4,8 +4,8 @@ left_c_pairs = [('r', 'g'), ('g', 'o'), ('o', 'b'), ('b', 'r')]
 right_c_pairs = [('g', 'o'), ('o', 'b'), ('b', 'r'), ('r', 'g')]
 outer_colors = ['g', 'o', 'b', 'r']
 
-middle_edges = {((10, 9, 0), (9, 10, 0)), ((-9, 10, 0), (-10, 9, 0)),
-    ((-10, -9, 0), (-9, -10, 0,)), ((9, -10, 0), (10, -9, 0))}
+middle_edges = [((10, 9, 0), (9, 10, 0)), ((-9, 10, 0), (-10, 9, 0)),
+    ((-10, -9, 0), (-9, -10, 0,)), ((9, -10, 0), (10, -9, 0))]
 outer_faces = [{p for p in sides[i] if p[z] not in [-10, 10]} for i in range(4)]
 
 upside_down = turn(start_cube, x, 180)
@@ -25,6 +25,7 @@ def edge_to_middle(cube, edge, order):
     tmp1, tmp2 = rotate(cube, rot_sequence1), rotate(cube, rot_sequence2)
     if correct_middle_edge(tmp1, edge, order): return (tmp1, rot_sequence1)
     if correct_middle_edge(tmp2, edge, order): return (tmp2, rot_sequence2)
+    return (cube, [])
 
 def middle_edge_up(cube, edge):
     n = middle_edges.index(edge)
@@ -41,8 +42,8 @@ def place_middle_edges(cube, order):
             rotations += res1[1]
     for edge in middle_edges:
         if outer_color_fits(new_cube, edge, order):
-            if not correct_middle_edge(new_cube, edge):
-                res2 = middle_edge_up(new_cube, edge, order)
+            if not correct_middle_edge(new_cube, edge, order):
+                res2 = middle_edge_up(new_cube, edge)
                 new_cube = res2[0]
                 rotations += res2[1]
     for edge in top_edges:
