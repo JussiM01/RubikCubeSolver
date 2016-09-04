@@ -33,10 +33,24 @@ def middle_edge_up(cube, edge):
         + ['Ui'] + side_inv[n] + ['U'] + side_rot[n])
     return (rotate(cube, rot_sequence), rot_sequence)
 
+def top_edge_to_inline(cube, edge, order):
+    new_cube, rotations = cube, []
+    n = order - top_edges.index(edge)
+    if n > 0:
+        new_cube = rotate(new_cube, ['D'] * n)
+        rotations += (['D'] * n)
+    if n < 0:
+        new_cube = rotate(new_cube, ['Di'] * -n)
+        rotations += (['Di']  * -n)
+    return (new_cube, rotations)
+
 def place_middle_edges(cube, order):
     new_cube, rotations = cube, []
     for edge in top_edges:
         if outer_color_fits(new_cube, edge, order):
+            step = top_edge_to_inline(new_cube, edge, order)
+            new_cube = step[0]
+            rotations += step[1]
             res1 = edge_to_middle(new_cube, edge, order)
             new_cube = res1[0]
             rotations += res1[1]
@@ -48,6 +62,9 @@ def place_middle_edges(cube, order):
                 rotations += res2[1]
     for edge in top_edges:
         if outer_color_fits(new_cube, edge, order):
+            step = top_edge_to_inline(new_cube, edge, order)
+            new_cube = step[0]
+            rotations += step[1]
             res3 = edge_to_middle(new_cube, edge, order)
             new_cube = res3[0]
             rotations += res3[1]
