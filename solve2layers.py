@@ -14,17 +14,23 @@ def outer_color_fits(cube, edge, order):
     return ({cube[face] for face in edge if face in outer_faces[order]}
         == {outer_colors[order]})
 
-def correct_middle_edge(cube, edge, order):
+def correct_middle_edge(cube, edge):
     return {cube[face] == upside_down[face] for face in edge} == {True}
 
+def no_y_in(cube, edge): return 'y' not in {cube[face] for face in edge}
+
+def suited_colors(cube, edge, order):
+    return (outer_colors[order] in {cube[face] for face in edge}
+        and no_y_in(cube, edge))
+
 def edge_to_middle(cube, edge, order):
-    rot_sequence1 = (['U'] + side_rot[order - 4] + ['Ui'] + side_inv[order - 4]
+    rot_sequence1 = (['U'] + side_rot[order - 3] + ['Ui'] + side_inv[order - 3]
         + ['Ui'] + side_inv[order] + ['U'] + side_rot[order])
     rot_sequence2 = (['Ui'] + side_inv[order - 1] + ['U'] + side_rot[order - 1]
         + ['U'] + side_rot[order] + ['Ui'] + side_inv[order])
     tmp1, tmp2 = rotate(cube, rot_sequence1), rotate(cube, rot_sequence2)
-    if correct_middle_edge(tmp1, edge, order): return (tmp1, rot_sequence1)
-    if correct_middle_edge(tmp2, edge, order): return (tmp2, rot_sequence2)
+    if correct_middle_edge(tmp1, edge): return (tmp1, rot_sequence1)
+    if correct_middle_edge(tmp2, edge): return (tmp2, rot_sequence2)
     return (cube, [])
 
 def middle_edge_up(cube, edge):
@@ -37,17 +43,18 @@ def top_edge_to_inline(cube, edge, order):
     new_cube, rotations = cube, []
     n = order - top_edges.index(edge)
     if n > 0:
-        new_cube = rotate(new_cube, ['D'] * n)
-        rotations += (['D'] * n)
+        new_cube = rotate(new_cube, ['U'] * n)
+        rotations += (['U'] * n)
     if n < 0:
-        new_cube = rotate(new_cube, ['Di'] * -n)
-        rotations += (['Di']  * -n)
+        new_cube = rotate(new_cube, ['Ui'] * -n)
+        rotations += (['Ui']  * -n)
     return (new_cube, rotations)
 
 def place_middle_edges(cube, order):
     new_cube, rotations = cube, []
     for edge in top_edges:
-        if outer_color_fits(new_cube, edge, order):
+        if outer_color_fits(new_cube, edge, order) and no_y_in(new_cube, edge):
+            print('1')
             step = top_edge_to_inline(new_cube, edge, order)
             new_cube = step[0]
             rotations += step[1]
@@ -55,13 +62,15 @@ def place_middle_edges(cube, order):
             new_cube = res1[0]
             rotations += res1[1]
     for edge in middle_edges:
-        if outer_color_fits(new_cube, edge, order):
-            if not correct_middle_edge(new_cube, edge, order):
+        if suited_colors(new_cube, edge, order):
+            if not correct_middle_edge(new_cube, edge):
+                print('2')
                 res2 = middle_edge_up(new_cube, edge)
                 new_cube = res2[0]
                 rotations += res2[1]
     for edge in top_edges:
-        if outer_color_fits(new_cube, edge, order):
+        if outer_color_fits(new_cube, edge, order) and no_y_in(new_cube, edge):
+            print('3')
             step = top_edge_to_inline(new_cube, edge, order)
             new_cube = step[0]
             rotations += step[1]
