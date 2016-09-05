@@ -24,10 +24,11 @@ def suited_colors(cube, edge, order):
         and no_y_in(cube, edge))
 
 def edge_to_middle(cube, edge, order):
-    rot_sequence1 = (['U'] + side_rot[order - 3] + ['Ui'] + side_inv[order - 3]
-        + ['Ui'] + side_inv[order] + ['U'] + side_rot[order])
-    rot_sequence2 = (['Ui'] + side_inv[order - 1] + ['U'] + side_rot[order - 1]
-        + ['U'] + side_rot[order] + ['Ui'] + side_inv[order])
+    ind1, ind2 = (order + 1) % 4, order - 1
+    rot_sequence1 = (['U'] + side_rot[ind1] + ['Ui'] + side_inv[ind1] + ['Ui']
+        + side_inv[order] + ['U'] + side_rot[order])
+    rot_sequence2 = (['Ui'] + side_inv[ind2] + ['U'] + side_rot[ind2] + ['U']
+        + side_rot[order] + ['Ui'] + side_inv[order])
     tmp1, tmp2 = rotate(cube, rot_sequence1), rotate(cube, rot_sequence2)
     if correct_middle_edge(tmp1, edge): return (tmp1, rot_sequence1)
     if correct_middle_edge(tmp2, edge): return (tmp2, rot_sequence2)
@@ -35,7 +36,8 @@ def edge_to_middle(cube, edge, order):
 
 def middle_edge_up(cube, edge):
     n = middle_edges.index(edge)
-    rot_sequence = (['U'] + side_rot[n - 4] + ['Ui'] + side_inv[n - 4]
+    ind = (n + 1) % 4
+    rot_sequence = (['U'] + side_rot[ind] + ['Ui'] + side_inv[ind]
         + ['Ui'] + side_inv[n] + ['U'] + side_rot[n])
     return (rotate(cube, rot_sequence), rot_sequence)
 
