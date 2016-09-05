@@ -26,22 +26,23 @@ def test_solve2layers():
 
     print_cube(new_cube)
 
-    for order in range(4):
-        res = place_middle_edges(new_cube, order)
-        new_cube = res[0]
-        rotations2 += res[1]
+    while not all_m_edges_correct(new_cube):
+        for order in range(4):
+            res = place_middle_edges(new_cube, order)
+            new_cube = res[0]
+            rotations2 += res[1]
 
-        print('NEW CUBE AT THE SOLVING PHASE OF ORDER ' + str(order) + ':')
-        print('')
-        print_cube(new_cube)
-        print('')
+            print('NEW CUBE AT THE SOLVING PHASE OF ORDER ' + str(order) + ':')
+            print('')
+            print_cube(new_cube)
+            print('')
 
-        print('ROTATIONS FOR ORDER ' + str(order) + ':')
-        print(res[1])
+            print('ROTATIONS FOR ORDER ' + str(order) + ':')
+            print(res[1])
 
-        print('')
-        print('####')
-        print('')
+            print('')
+            print('####')
+            print('')
 
     print(str(twolayers_solved(new_cube)))
     print('')
