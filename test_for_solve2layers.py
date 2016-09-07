@@ -26,12 +26,8 @@ def test_solve2layers():
 
     print_cube(new_cube)
 
-    for i in range(10):
-    # while not al_m_edges_correct(new_cube):
-        # for order in range(4):
-        #     res = place_middle_edges(new_cube, order)
-        #     new_cube = res[0]
-        #     rotations2 += res[1]
+    while not all_m_edges_correct(new_cube):
+
         step1 = place_right_edges(new_cube)
         new_cube = step1[0]
         rotations2 += step1[1]

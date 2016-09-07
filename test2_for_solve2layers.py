@@ -24,7 +24,7 @@ def test_make_a_2nd_layer(num_iter):
     count = 0
     for n in range(num_iter):
         cube = scramble(start_cube)
-        new_cube = turn(make_a_top_layer(cube)[0], x, 180)
+        new_cube = make_a_2nd_layer(cube)[0]
         solved = twolayers_solved(new_cube)
         if solved: count += 1
     print('Solved correctly ' + str(count) + ' out of ' + str(num_iter) + '.')
