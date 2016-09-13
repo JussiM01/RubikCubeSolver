@@ -10,19 +10,13 @@ def test_solveyellowcross():
 
     print_cube(cube)
 
-    new_cube, rotations1, rotations2 = make_a_2nd_layer(cube)
-
-    print('')
-    print('CUBE WITH 2 LAYERS SOLVED:')
-    print('')
-
-    print_cube(new_cube)
-
-    new_cube, rotations1, rotations2 = make_a_yellow_cross(new_cube)
+    new_cube, rotations1, rotations2 = make_a_yellow_cross(cube)
 
     print('')
     print('CUBE WITH YELLOW CROSS SOLVED:')
     print('')
+
+    print_cube(new_cube)
 
     print(str(yellow_cross_solved(new_cube)))
     print('')
