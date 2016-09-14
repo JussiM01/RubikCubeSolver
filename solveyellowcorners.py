@@ -8,7 +8,7 @@ def num_yellow_corners(cube): return sum([int(cube[p] == 'y') for p in top_cs])
 def yellow_face_1(cube): return cube[(9, -10, 9)] == 'y'
 def yellow_face_2(cube): return cube[(-10, -9, 9)] == 'y'
 def yellow_face_3(cube): return cube[(-9, 10, 9)] == 'y'
-def yellow_face_4(cube): return cube[(10, 9, 9)] = 'y'
+def yellow_face_4(cube): return cube[(10, 9, 9)] == 'y'
 
 def fl_yellow_corner(cube): return cube[(9, -9, 10)] == 'y'
 def bl_yellow_corner(cube): return cube[(-9, -9, 10)] == 'y'
@@ -18,7 +18,7 @@ def fr_yellow_corner(cube): return cube[(9, 9, 10)] == 'y'
 def yellow_face_5(cube): return cube[(10, -9, 9)] == 'y'
 def yellow_face_6(cube): return cube[(-9, -10, 9)] == 'y'
 def yellow_face_7(cube): return cube[(-10, 9, 9)] == 'y'
-def yellow_face_8(cube): return cube[(9, 10, 9)] = 'y'
+def yellow_face_8(cube): return cube[(9, 10, 9)] == 'y'
 
 y_cs_rot1 = ['R', 'U', 'Ri', 'U', 'R', 'U', 'U', 'Ri']
 y_cs_rot2 = ['F', 'U', 'Fi', 'U', 'F', 'U', 'U', 'Fi']
@@ -50,5 +50,3 @@ def recurse_y_corners(cube, rot1, rot2):
 def make_yellow_corners(cube):
     new_cube, rotations1, rotations2 = make_a_yellow_cross(cube)
     return recurse_y_corners(new_cube, rotations1, rotations2)
-
-# TODO: Test and debug.
