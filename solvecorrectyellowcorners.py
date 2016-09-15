@@ -24,7 +24,7 @@ def correct_DB(cube): return correct_D(cube) and correct_B(cube)
 
 def num_correct_corners(cube):
     return sum([int(correct_A(cube)), int(correct_B(cube)),
-        int(correct_C(cube)), int(correct_F(cube))])
+        int(correct_C(cube)), int(correct_D(cube))])
 
 def correct_yellow_corners(cube): return num_correct_corners(cube) == 4
 
@@ -51,8 +51,8 @@ def make_correct_corners(cube):
     if n == 4: return (new_cube, rotations1, rotations2)
     if n < 2:
         for j in range(1, 4):
-            new_cube = rotate(new_cube, (['U'] * j))
-            rotations2 += (['U'] * j)
+            new_cube = rotate(new_cube, ['U'])
+            rotations2 += ['U']
             if num_correct_corners(new_cube) > 1:
                 return recurse_correct_cs(new_cube, rotations1, rotations2)
 
