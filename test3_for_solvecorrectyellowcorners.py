@@ -1,5 +1,5 @@
 from scramblecube import *
-from solveyellowcorners import *
+from solvecorrectyellowcorners import *
 
 """Test which checks that make_correct_corners(cube)[1] and
 make_correct_corners(cube)[2] are rotation sequence for which
