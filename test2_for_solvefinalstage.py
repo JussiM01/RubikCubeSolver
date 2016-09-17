@@ -1,5 +1,5 @@
 from scramblecube import *
-from solvefianlstage import *
+from solvefinalstage import *
 from test2_for_solve2layers import *
 
 def cube_solved(cube):
