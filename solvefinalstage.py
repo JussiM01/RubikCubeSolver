@@ -33,7 +33,7 @@ def recurse_correct_es(cube, rot1, rot2):
         rotations2 += clockwise1
         return recurse_correct_es(new_cube, rotations1, rotations2)
     for i in range(4):
-        if correct_edge[i]:
+        if correct_edge[i](new_cube):
             test_cube = rotate(new_cube, clockwise[i])
             if num_correct_edges(test_cube) == 4:
                 return (test_cube, rotations1, rotations2 + clockwise[i])
@@ -44,5 +44,3 @@ def recurse_correct_es(cube, rot1, rot2):
 def make_correct_edges(cube):
     new_cube, rotations1, rotations2 = make_correct_corners(cube)
     return recurse_correct_es(new_cube, rotations1, rotations2)
-
-# TODO: Test and debug.
