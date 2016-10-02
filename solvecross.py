@@ -1,6 +1,5 @@
 from pointsandrotations import *
 from sidesandprinting import *
-from solvingstatecheck import *
 
 def color_fits(cube, face, color_pair):
     return (cube[face] == color_pair[0] or cube[face] == color_pair[1])
