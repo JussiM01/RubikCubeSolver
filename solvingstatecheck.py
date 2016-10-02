@@ -43,3 +43,8 @@ def print_state(cube):
     state = check_state(cube)
     if state == 'solved cube': print('solved cube')
     else: print(state[0] + 'on the' + state[1] + 'side')
+
+# TODO: Test and debug.
+# Add all needed stages to top_states and states.
+# Change the definitions so that top_cross needs to be white (as in the guide).
+# Change/add also the rest of the definitions as tey are in the solution guide.
