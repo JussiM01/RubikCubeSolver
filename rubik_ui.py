@@ -1,10 +1,9 @@
 from pointsandrotations import *
 from sidesandprinting import *
+from scramblecube import *
 # from solvingstatecheck import * # CHANGE THIS BACK WHEN DEBUGGED.
 
 """Temporary user interface. To be replaced with a graphical version."""
-
-cube = {}
 
 print('Give the colors of the stickers in your cube as follows:')
 print('')
@@ -26,32 +25,40 @@ print('')
 print('Example: the string "gggooorrr" represents a side where first row')
 print('is green, second row is orange and third row is red.')
 print('')
-print('Now, choose the front side.')
+print('This program can also scramble a cube for you.')
+print('')
+print('Do you want to give your own cube settings or let us give you a cube?')
 
-##### Here should be a block which asks the user if he/she wants to use own
-# cube or let the program to scramble a cube for him/her. #####
+answer = input("Write 'y' if you use your own cube and 'n' if otherwiswe :")
 
-# the followin code should be then inside a function which is only executed
-# if the answer is yes.
+while answer not in {'y', 'n'}:
+    answer = input("Please try again. Write 'y' or 'n' (without citation): ")
 
-# Add also code that checks wheter the input is in correct format?
+def ask_input():
+    users_cube = {}
+    print('Now, choose the front side.')
+    front_string = input('Give the string representation of the front side:')
+    left_string = input('Same for the left side:')
+    back_string = input('Same for the back side:')
+    right_string = input('Same for the right side:')
+    top_string = input('Same for the top side:')
+    bottom_string = input('Same for the bottom side:')
 
-front_string = input('Give the string representation of the front side:')
-left_string = input('Same for the left side:')
-back_string = input('Same for the back side:')
-right_string = input('Same for the right side:')
-top_string = input('Same for the top side:')
-bottom_string = input('Same for the bottom side:')
+    side_strings = [front_string, left_string, back_string, right_string,
+        top_string, bottom_string]
 
-side_strings = [front_string, left_string, back_string, right_string,
-    top_string, bottom_string]
+    for n in range(6):
+        for m in range(9): users_cube[sides[n][m]] = side_strings[n][m]
+    return users_cube
 
-for n in range(6):
-    for m in range(9): cube[sides[n][m]] = string_rep[n][m]
+if answer == 'y':
+    cube = ask_input()
+elif answer == 'n':
+    cube = scramble(start_cube)
 
-# (end of the function, which returns the cube.)
-
+print('')
 print('So your cube looks like this:')
+print('')
 
 print_cube(cube)
 
