@@ -1,7 +1,7 @@
 from pointsandrotations import *
 from sidesandprinting import *
 from scramblecube import *
-# from solvingstatecheck import * # CHANGE THIS BACK WHEN DEBUGGED.
+from solvingstatecheck import *
 
 """Temporary user interface. To be replaced with a graphical version."""
 
@@ -78,7 +78,45 @@ print('')
 
 print_cube(cube)
 
-# print: you currently have (solving state) solved
-# print: do you want instruction for the next state?
-# if yes print them and how the cube should look after that
-# repeat until solved.
+s_state = check_state(cube)
+cube = s_state[0]
+state_num = s_state[1]
+last_rot_num = 0
+
+solver_functions = [make_correct_edges, make_correct_corners,
+    make_yellow_corners, make_a_yellow_cross, make_a_2nd_layer,
+    make_a_top_layer, make_a_cross]
+
+while state_num != 0:
+
+    if state_num == 4:
+        print('You should now turn the cube upside down. That is, white side')
+        print('should be on the bottom, yellow center on the top, and red rows')
+        print('should be to two lowest rows on the front side.')
+
+    print('You currently have ' + sring_rep[i] + ' solved.')
+    print('Do you want the instructions for next stage?")
+    print("Write 'y' if you want instructions for the next stage.")
+    print('Any other key will let you to exit this program.')
+    reply = input('Write your answer here: ')
+
+    if reply == 'y':
+        next_step = solver_functions[state_num - 1]
+        cube = next_step[0]
+        insructions = next_step[1][last_rot_num:] # Removes previous rotations.
+        last_rot_num += len(insructions)
+        state_num -= 1
+
+        print('Rotations for the next stage are:')
+        for rotation in instructions:
+            print(rotation)
+
+        print('')
+        print('After doing these rotations your cube should look like this:')
+        print_cube(cube)
+
+    else: # EXIT
+
+print('Gongratulations! You have solved the cube.')
+
+# TODO: Test and debug.
