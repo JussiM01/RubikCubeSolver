@@ -73,7 +73,7 @@ solved_state = [cube_solved, correct_yellow_corners, yellow_top, yellow_cross,
     twolayers_solved, corners_solved, cross_solved]
 
 string_rep = ['the cube', 'correct yellow corners', 'yellow top',
-    'yellow cross', 'two layers', 'white corners', 'white cross',
+    'yellow cross', 'two layers', 'one layer', 'white cross',
     'not yet any state']
 
 def start_orientation(cube):
@@ -88,7 +88,8 @@ def check_state(cube):
         for deg2 in [0, 90, 180, 270]:
             for i in range(7):
                 turned = turn(turn(cube, x, deg1), y, deg2)
+
                 if solved_state[i](turned): return (turned, i)
-    return (start_orientation(turned), 7)
+    return (start_orientation(cube), 7)
 
 # TODO: Test and debug.

@@ -102,11 +102,12 @@ while state_num != 0:
     print('Any other key will let you to exit this program.')
     reply = input('Write your answer here: ')
 
-    if reply == 'y':
-        next_step = solver_functions[state_num - 1]
-        cube = next_step(cube)[0]
-        insructions = next_step(cube)[1][last_rot_num:] # Removes previous rotations.
-        last_rot_num += len(insructions) # Something wrong above? Notice also side effects.
+    if reply == 'y': # CASES WHERE THE CUBE HAS BEEN TURNED SHOULD BE HANDELED
+        solver = solver_functions[state_num - 1] # DIFFERENTLY.
+        next_step = solver(cube)
+        cube = next_step[0]
+        instructions = next_step[1][last_rot_num:] # Removes previous rotations.
+        last_rot_num += len(instructions) # SOMETHING WRONG ABOVE?
         state_num -= 1
 
         print('Rotations for the next stage are:')
