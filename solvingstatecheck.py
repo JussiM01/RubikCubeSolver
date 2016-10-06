@@ -1,6 +1,6 @@
 from sidesandprinting import *
 from pointsandrotations import *
-from solvefinalstate import *
+from solvefinalstage import *
 
 def cube_solved(cube):
     if {cube[p] == 'r' for p in front} != {True}: return False
@@ -73,7 +73,8 @@ solved_state = [cube_solved, correct_yellow_corners, yellow_top, yellow_cross,
     twolayers_solved, corners_solved, cross_solved]
 
 string_rep = ['the cube', 'correct yellow corners', 'yellow top',
-    'yellow cross', 'two layers', 'white corners', 'white cross']
+    'yellow cross', 'two layers', 'white corners', 'white cross',
+    'not yet any state']
 
 def start_orientation(cube):
     for deg1 in [0, 90, 180, 270]:

@@ -89,22 +89,24 @@ solver_functions = [make_correct_edges, make_correct_corners,
 
 while state_num != 0:
 
-    if state_num == 4:
+    if answer == 'y' and state_num == 4:
         print('You should now turn the cube upside down. That is, white side')
         print('should be on the bottom, yellow center on the top, and red rows')
         print('should be to two lowest rows on the front side.')
+    if answer == 'n' and state_num == 4:
+        print('The cube will be now turned upside.')
 
-    print('You currently have ' + sring_rep[i] + ' solved.')
-    print('Do you want the instructions for next stage?")
+    print('You currently have ' + string_rep[state_num] + ' solved.')
+    print('Do you want the instructions for next stage?')
     print("Write 'y' if you want instructions for the next stage.")
     print('Any other key will let you to exit this program.')
     reply = input('Write your answer here: ')
 
     if reply == 'y':
         next_step = solver_functions[state_num - 1]
-        cube = next_step[0]
-        insructions = next_step[1][last_rot_num:] # Removes previous rotations.
-        last_rot_num += len(insructions)
+        cube = next_step(cube)[0]
+        insructions = next_step(cube)[1][last_rot_num:] # Removes previous rotations.
+        last_rot_num += len(insructions) # Something wrong above? Notice also side effects.
         state_num -= 1
 
         print('Rotations for the next stage are:')
@@ -114,8 +116,9 @@ while state_num != 0:
         print('')
         print('After doing these rotations your cube should look like this:')
         print_cube(cube)
+        print('')
 
-    else: # EXIT
+    else: exit(0)
 
 print('Gongratulations! You have solved the cube.')
 
