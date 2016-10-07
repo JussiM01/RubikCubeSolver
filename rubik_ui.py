@@ -81,20 +81,21 @@ print_cube(cube)
 s_state = check_state(cube)
 cube = s_state[0]
 state_num = s_state[1]
-last_rot_num = 0
+last_rot_num1 = 0
+last_rot_num2 = 0
 
 solver_functions = [make_correct_edges, make_correct_corners,
     make_yellow_corners, make_a_yellow_cross, make_a_2nd_layer,
     make_a_top_layer, make_a_cross]
 
-while state_num != 0:
-
+while state_num != 0: # state_num should maybe checked in the loop?
+# Since some steps might be unnecessary (if more gets solved in one step).
     if answer == 'y' and state_num == 4:
         print('You should now turn the cube upside down. That is, white side')
         print('should be on the bottom, yellow center on the top, and red rows')
         print('should be to two lowest rows on the front side.')
     if answer == 'n' and state_num == 4:
-        print('The cube will be now turned upside.')
+        print('The cube will be now turned upside down.')
 
     print('You currently have ' + string_rep[state_num] + ' solved.')
     print('Do you want the instructions for next stage?')
@@ -102,21 +103,31 @@ while state_num != 0:
     print('Any other key will let you to exit this program.')
     reply = input('Write your answer here: ')
 
-    if reply == 'y': # CASES WHERE THE CUBE HAS BEEN TURNED SHOULD BE HANDELED
-        solver = solver_functions[state_num - 1] # DIFFERENTLY.
+    if reply == 'y':
+        solver = solver_functions[state_num - 1]
+        if state_num < 5:
+            cube = start_orientation(cube)
         next_step = solver(cube)
         cube = next_step[0]
-        instructions = next_step[1][last_rot_num:] # Removes previous rotations.
-        last_rot_num += len(instructions) # SOMETHING WRONG ABOVE?
+        if state_num > 4: # Is this correct?
+            instructions = next_step[1][last_rot_num1:] # Check that this is
+            last_rot_num1 += len(instructions) # correct.
+        else:
+            instructions = next_step[2][last_rot_num2:] # Same here.
+            last_rot_num2 += len(instructions)
         state_num -= 1
 
         print('Rotations for the next stage are:')
-        for rotation in instructions:
-            print(rotation)
+        print('')
+        rot_string = ', '.join(instructions)
+        print(rot_string)
 
         print('')
         print('After doing these rotations your cube should look like this:')
-        print_cube(cube)
+        if state_num < 4:
+            print_cube(cube)
+        else:
+            print_cube(start_orientation(cube))
         print('')
 
     else: exit(0)
