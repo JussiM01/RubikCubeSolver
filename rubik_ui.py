@@ -78,13 +78,8 @@ print('')
 
 print_cube(cube)
 
-# s_state = check_state(cube)
-# cube = s_state[0]
-# state_num = s_state[1]
-# last_rot_num1 = 0
-# last_rot_num2 = 0
-
 state_num = 7 # Default: cube scrambled.
+count = 0 # How many times a state lower than 5 is countered.
 
 solver_functions = [make_correct_edges, make_correct_corners,
     make_yellow_corners, make_a_yellow_cross, make_a_2nd_layer,
@@ -96,44 +91,40 @@ while state_num != 0:
     state_num = s_state[1]
     if state_num == 0:
         break
-    if answer == 'y' and state_num == 4: # Same here as below.
+    if state_num < 5: count += 1
+    if answer == 'y' and count == 1:
         print('You should now turn the cube upside down. That is, white side')
         print('should be on the bottom, yellow center on the top, and red rows')
         print('should be to two lowest rows on the front side.')
-    if answer == 'n' and state_num == 4: # This should change. see the explanation below.
-        print('The cube will be now turned upside down.') # This should be printed even if the state 4 is skpipped. That is: first time when state_num >= 4.
-
+        print('')
+    if answer == 'n' and count == 1:
+        print('The cube will be now turned upside down.')
+        print('')
     print('You currently have ' + string_rep[state_num] + ' solved.')
+    print('')
     print('Do you want the instructions for next stage?')
+    print('')
     print("Write 'y' if you want instructions for the next stage.")
-    print('Any other key will let you to exit this program.')
-    reply = input('Write your answer here: ')
-
+    reply = input('(Any other key will let you to exit this program): ')
+    print('')
     if reply == 'y':
         solver = solver_functions[state_num - 1]
         if state_num < 5:
             cube = start_orientation(cube)
         next_step = solver(cube)
         cube = next_step[0]
-        if state_num > 4: # Is this correct?
-            instructions = next_step[1]#[last_rot_num1:] # Check that this is
-            # last_rot_num1 += len(instructions) # correct.
+        if state_num > 4:
+            instructions = next_step[1]
         else:
-            instructions = next_step[2]#[last_rot_num2:] # Same here.
-        #     last_rot_num2 += len(instructions)
-        # state_num -= 1
-
+            instructions = next_step[2]
+        print('')
         print('Rotations for the next stage are:')
         print('')
-        rot_string = ', '.join(instructions)
-        print(rot_string)
-
+        print(', '.join(instructions))
         print('')
         print('After doing these rotations your cube should look like this:')
         print_cube(cube)
-
         print('')
-
     else: exit(0)
 
 print('Gongratulations! You have solved the cube.')
