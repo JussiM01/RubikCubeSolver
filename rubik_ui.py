@@ -94,15 +94,17 @@ while state_num != 0:
     s_state = check_state(cube)
     cube = s_state[0]
     state_num = s_state[1]
-
-    if answer == 'y' and state_num == 4:
+    if state_num == 0:
+        break
+    if answer == 'y' and state_num == 4: # Same here as below.
         print('You should now turn the cube upside down. That is, white side')
         print('should be on the bottom, yellow center on the top, and red rows')
         print('should be to two lowest rows on the front side.')
     if answer == 'n' and state_num == 4: # This should change. see the explanation below.
         print('The cube will be now turned upside down.') # This should be printed even if the state 4 is skpipped. That is: first time when state_num >= 4.
-    print('You currently have ' + string_rep[state_num] + ' solved.') # This part should NOT be printed if the cube gets solved.
-    print('Do you want the instructions for next stage?') # And in that case the loop should be exited before this part.
+
+    print('You currently have ' + string_rep[state_num] + ' solved.')
+    print('Do you want the instructions for next stage?')
     print("Write 'y' if you want instructions for the next stage.")
     print('Any other key will let you to exit this program.')
     reply = input('Write your answer here: ')
