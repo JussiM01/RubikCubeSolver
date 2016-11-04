@@ -3,23 +3,15 @@ from sidesandprinting import *
 from scramblecube import *
 from solvingstatecheck import *
 
-def test_ui():
+def test1_ui():
     cube = scramble(start_cube)
-    print('')
-    print('SCRAMBLED CUBE:')
-    print('')
-
-    print_cube(cube)
-
     results = []
     cube = scramble(start_cube)
     state_num = 7 # Default: cube scrambled.
     count = 0 # How many times a state lower than 5 is countered.
-
     solver_functions = [make_correct_edges, make_correct_corners,
         make_yellow_corners, make_a_yellow_cross, make_a_2nd_layer,
         make_a_top_layer, make_a_cross]
-
     while state_num != 0:
         s_state = check_state(cube)
         cube = s_state[0]
@@ -39,17 +31,8 @@ def test_ui():
             instructions = next_step[2]
             test_cube = rotate(turn(old_cube, x, 180), instructions)
         results.append(cube == test_cube)
+    return set(results) == {True}
 
-    print('')
-    print('CUBE AFTER LAST STAGE:')
-    print('')
-
-    print_cube(cube)
-
-    print(str(cube_solved(cube)))
-
-    print('')
-    print('ALL STAGES MATCH:')
-    print('')
-
-    print(set(results) == {True})
+def test_rubik_ui(num_iter):
+    res = sum([int(test1_ui()) for i in range(num_iter)])
+    print('Solved correctly ' + str(res) + ' out of ' + str(num_iter) + '.')

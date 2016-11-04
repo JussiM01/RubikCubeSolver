@@ -113,7 +113,7 @@ while state_num != 0:
             cube = start_orientation(cube)
         next_step = solver(cube)
         cube = next_step[0]
-        if state_num > 4:
+        if state_num > 5:
             instructions = next_step[1]
         else:
             instructions = next_step[2]
@@ -128,5 +128,3 @@ while state_num != 0:
     else: exit(0)
 
 print('Gongratulations! You have solved the cube.')
-
-# TODO: Test and debug.
