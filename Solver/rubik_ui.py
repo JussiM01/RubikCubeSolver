@@ -30,7 +30,7 @@ print('')
 print('Do you want to give your own cube settings or let us give you a cube?')
 print('')
 
-answer = input("Write 'y' if you use your own cube and 'n' if otherwiswe : ")
+answer = input("Write 'y' if you use your own cube and 'n' otherwise : ")
 
 print('')
 
