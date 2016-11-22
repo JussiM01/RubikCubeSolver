@@ -7,7 +7,7 @@ My initial thought was to make program that learns to solve the Rubik's cube on 
 **How to use**
 
 Download or clone this repository and run the script rubik_ui.py from Solver directory with python 3:
-```python
+```
 git clone https://github.com/JussiM01/RubikCubeSolver.git
 cd RubikCubeSolver/Solver/
 python3 rubik_ui.py
