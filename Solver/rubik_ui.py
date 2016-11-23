@@ -68,6 +68,13 @@ def ask_input():
     return users_cube
 
 if answer == 'y':
+    print('Position first your cube as follows:')
+    print('')
+    print('The top face should have white center piece.')
+    print('The front face should have red center piece.')
+    print('The left face should have green center piece.')
+    print('The right face should have blue center piece.')
+    print('')
     cube = ask_input()
 elif answer == 'n':
     cube = scramble(start_cube)
