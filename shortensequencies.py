@@ -1,5 +1,5 @@
 def opposite_rotations(rot1, rot2):
-    return len(rot1) !=len(rot2) and rot1[0] == rot2[0]
+    return len(rot1) != len(rot2) and rot1[0] == rot2[0]
 
 def shorten1(seq):
     for n in range(len(seq) - 1):
