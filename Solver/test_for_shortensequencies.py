@@ -1,11 +1,12 @@
 from solvefinalstage import *
 from shortensequencies import *
+import random as rd
 
-all_rotations = [['R'], ['F'], ['L'], ['B'], ['U'], ['D'], ['Ri'], ['Fi'],
-    ['Li'], ['Bi'], ['Ui'], ['Di']]
+all_rotations = ['R', 'F', 'L', 'B', 'U', 'D',
+    'Ri', 'Fi', 'Li', 'Bi', 'Ui', 'Di']
 
 def test_shorten():
-    sequence = [all_rotations[rd.random()] for i in range(10)]
+    sequence = [all_rotations[rd.randrange(12)] for i in range(10)]
     shortened = shorten(sequence)
     print('SEQUENCE: ', sequence)
     print('SHORTENED SEQUENCE: ', shortened)
